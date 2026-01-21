@@ -1,12 +1,19 @@
 import { useHome } from '@/hooks/useHome';
 import React, { useState } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import {
+  FlatList,
+  ListRenderItemInfo,
+  RefreshControl,
+  Text,
+  View,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Components from '@/components';
 import colors from '@/theme/colors';
 
 import styles from './styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { HomeComponent } from '@/types/home';
 
 const HomeScreen = () => {
   const { components = [], refetch, loading } = useHome();
@@ -18,7 +25,7 @@ const HomeScreen = () => {
     setRefreshing(false);
   };
 
-  const renderSection = ({ item }: any) => {
+  const renderSection = ({ item }: ListRenderItemInfo<HomeComponent>) => {
     switch (item.componentType) {
       case 'LARGE_COVERS':
         return <Components.HeroCarousel section={item} />;
@@ -36,20 +43,26 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <FlatList
-        data={components}
-        keyExtractor={item => item.id + item.sectionTitle}
-        renderItem={renderSection}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.listContentContainer}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            tintColor={colors.white}
-          />
-        }
-      />
+      {loading && !refreshing ? (
+        <View style={styles.container}>
+          <Text style={styles.text}>Loading...</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={components}
+          keyExtractor={item => item.id + item.sectionTitle}
+          renderItem={renderSection}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.listContentContainer}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor={colors.white}
+            />
+          }
+        />
+      )}
     </SafeAreaView>
   );
 };

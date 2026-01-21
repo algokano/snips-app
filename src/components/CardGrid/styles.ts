@@ -13,8 +13,6 @@ const styles = StyleSheet.create({
   columnWrapper: {
     justifyContent: 'space-between',
     marginHorizontal: 16,
-    width: '49%',
-    height: 236,
   },
   header: {
     marginHorizontal: 16,
@@ -34,6 +32,8 @@ const styles = StyleSheet.create({
   },
   card: {
     marginBottom: 8,
+    width: '49%',
+    height: 236,
   },
 });
 export default styles;

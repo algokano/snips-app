@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import { BlurView } from '@react-native-community/blur';
 
 import HomeScreen from '@/screens/Home';
 import FeedScreen from '@/screens/Feed';
@@ -16,6 +15,7 @@ import HomeActiveIcon from '../assets/icon_home_active.svg';
 import ForYouIcon from '../assets/icon_for_you.svg';
 import RewardsIcon from '../assets/icon_rewards.svg';
 import ProfileIcon from '../assets/icon_profile.svg';
+import { TAB_BAR_HEIGHT } from '@/constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,26 +30,12 @@ const tabBarOptions: BottomTabNavigationOptions = {
     backgroundColor: colors.black,
     borderTopWidth: 0,
     elevation: 0,
+    minHeight: TAB_BAR_HEIGHT,
   },
   tabBarLabelStyle: {
     marginTop: 6,
     fontSize: 11,
   },
-  //   tabBarBackground: () => (
-  //     <View style={StyleSheet.absoluteFill}>
-  //       <BlurView
-  //         blurType="dark"
-  //         blurAmount={20}
-  //         style={StyleSheet.absoluteFill}
-  //       />
-  //       <View
-  //         style={[
-  //           StyleSheet.absoluteFill,
-  //           { backgroundColor: 'rgba(0, 0, 0, 0.4)' },
-  //         ]}
-  //       />
-  //     </View>
-  //   ),
 };
 
 export default function TabsNavigator() {

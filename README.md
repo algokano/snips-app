@@ -1,52 +1,164 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Snips Demo App
 
-# Getting Started
+A React Native mobile application. The app features a **Home Page** with categorized content and a **TikTok-style Feed Page** with vertical video swiping.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 📱 Screenshots
 
-## Step 1: Start Metro
+| Home Page | Feed Page |
+|-----------|-----------|
+| Categorized content sections | Vertical video feed with expandable descriptions |
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+---
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## 🚀 Getting Started
 
-```sh
-# Using npm
+### Prerequisites
+
+- **Node.js** >= 20
+- **React Native CLI** environment configured ([Setup Guide](https://reactnative.dev/docs/set-up-your-environment))
+- **Xcode** (for iOS)
+- **Android Studio** (for Android)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/algokano/snips-app.git
+cd snips-app
+
+# Install dependencies
+npm install
+
+# iOS only: Install CocoaPods
+cd ios && bundle install && bundle exec pod install && cd ..
+```
+
+### Running the App
+
+```bash
+# Start Metro bundler
 npm start
 
-# OR using Yarn
-yarn start
-```
+# Run on iOS
+npm run ios
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+# Run on Android
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 🛠 Technical Stack
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+| Category | Choice | Rationale |
+|----------|--------|-----------|
+| **Framework** | React Native 0.83 (bare) | Latest stable version with new architecture support |
+| **Language** | TypeScript | Type safety and better DX |
+| **Navigation** | React Navigation v7 | Industry standard, bottom tabs + stack support |
+| **State Management** | React Hooks (useState, useCallback) | Appropriate for app scope, no Redux overhead |
+| **Animations** | Reanimated 3 + Gesture Handler | 60fps native animations for smooth feed swiping |
+| **Video** | react-native-video | Robust video playback with buffering controls |
+| **Styling** | StyleSheet + Linear Gradient | Performance-optimized native styling |
 
-```sh
-bundle install
+---
+
+## 🏗 Architecture
+
+### Project Structure
+
+```
+src/
+├── api/          # API client and endpoint functions
+├── assets/       # SVG icons and images
+├── components/   # Reusable UI components (presentational)
+├── constants/    # App-wide constants (durations, thresholds, config)
+├── hooks/        # Custom hooks for data fetching and logic
+├── navigation/   # React Navigation setup (tabs, routes)
+├── screens/      # Screen-level components
+├── theme/        # Colors and UI constants
+├── types/        # TypeScript interfaces
+└── utils/        # Helper functions
 ```
 
-Then, and every time you update your native dependencies, run:
+### Key Architectural Decisions
 
-```sh
-bundle exec pod install
-```
+1. **Custom Hooks Pattern**
+   - `useHome()` and `useFeed()` encapsulate API calls and state
+   - Screens remain clean, focused on composition
+   - Provides loading/error states and refetch capabilities
+
+2. **Component Separation**
+   - **Presentational components** (`PosterCard`, `LargeCoverCard`) receive data via props
+   - **Container components** (screens) handle data fetching and state
+   - Components are reusable and testable
+
+3. **Centralized Constants**
+   - Animation durations, thresholds, and config values in `src/constants/`
+   - Easy to tune UX and maintain consistency
+
+4. **Gesture-Based Feed Navigation**
+   - Uses Reanimated worklets for 60fps gesture tracking
+   - Shared values for animation state to avoid JS thread blocking
+   - Edge resistance effect when at first/last item
+
+5. **Type-Safe API Layer**
+   - Generic `apiGet<T>()` function with typed responses
+   - Discriminated unions for component types (`LARGE_COVERS | REGULAR_COVERS | MORE_TITLES`)
+
+---
+
+## 📋 Features Implemented
+
+### Home Page
+- ✅ Fetches content from API endpoint
+- ✅ Renders sections based on `componentType` (LARGE_COVERS, REGULAR_COVERS, MORE_TITLES)
+- ✅ Hero carousel for featured content
+- ✅ Horizontal scrollable rows
+- ✅ Grid layout for additional titles
+- ✅ Pull-to-refresh functionality
+
+### Feed Page
+- ✅ TikTok-style vertical swipe navigation
+- ✅ Video playback with poster fallback
+- ✅ Expandable description (More/Less toggle)
+- ✅ Long-press to pause video
+- ✅ Tap to mute/unmute
+- ✅ Action buttons (mocked: Save, Episodes, Share, Menu)
+
+### Navigation
+- ✅ Bottom tab navigator with 4 tabs
+- ✅ Home and For You tabs functional
+- ✅ Rewards and Profile tabs as placeholders
+
+---
+
+## 🎯 Assumptions Made
+
+1. **Placeholder Tabs**: Rewards and Profile screens return placeholder views as they were not part of the core requirements.
+
+2. **Video Autoplay**: Videos autoplay when the slide becomes active and the screen is focused.
+
+3. **Mock Action Buttons**: Save, Episodes, Share, and Menu buttons are visual only (no backend integration).
+
+4. **API Data**: Some fields from the API response may be unused if not relevant to the Figma design.
+
+---
+
+## 📝 Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start Metro bundler |
+| `npm run ios` | Run on iOS simulator |
+| `npm run android` | Run on Android emulator |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run Jest tests |
+
+---
+
+## 📄 License
+
+This project was created as part of a technical assessment for Snips.
 
 For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
 
@@ -57,41 +169,3 @@ npm run ios
 # OR using Yarn
 yarn ios
 ```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
