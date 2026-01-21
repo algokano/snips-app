@@ -4,13 +4,15 @@ A React Native mobile application. The app features a **Home Page** with categor
 
 ## 📱 Screenshots
 
-![simulator_screenshot_44984657-BD4C-40BC-AE8E-52D3BFD59105](https://github.com/user-attachments/assets/e011d08c-2199-4e94-acb8-9e57a588b5ba)
-<img width="1320" height="2868" alt="simulator_screenshot_397E8DA7-5597-4316-833B-0DCE9222CAE4" src="https://github.com/user-attachments/assets/13d971ca-1307-410c-8c3e-8cac5e738b62" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e011d08c-2199-4e94-acb8-9e57a588b5ba" width="250" alt="Home Page" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/13d971ca-1307-410c-8c3e-8cac5e738b62" width="250" alt="Feed Page" />
+</p>
 
-
-| Home Page | Feed Page |
-|-----------|-----------|
-| Categorized content sections | Vertical video feed with expandable descriptions |
+<p align="center">
+  <em>Home Page</em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em>Feed Page</em>
+</p>
 
 ---
 
@@ -31,23 +33,23 @@ git clone https://github.com/algokano/snips-app.git
 cd snips-app
 
 # Install dependencies
-npm install
+yarn install
 
 # iOS only: Install CocoaPods
-cd ios && bundle install && bundle exec pod install && cd ..
+cd ios && pod install && cd ..
 ```
 
 ### Running the App
 
 ```bash
 # Start Metro bundler
-npm start
+yarn start
 
 # Run on iOS
-npm run ios
+yarn ios
 
 # Run on Android
-npm run android
+yarn android
 ```
 
 ---
@@ -146,17 +148,6 @@ src/
 
 4. **API Data**: Some fields from the API response may be unused if not relevant to the Figma design.
 
----
-
-## 📝 Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm start` | Start Metro bundler |
-| `npm run ios` | Run on iOS simulator |
-| `npm run android` | Run on Android emulator |
-| `npm run lint` | Run ESLint |
-| `npm test` | Run Jest tests |
 
 ---
 
@@ -165,11 +156,3 @@ src/
 This project was created as part of a technical assessment for Snips.
 
 For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
