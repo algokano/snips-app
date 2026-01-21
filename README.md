@@ -4,6 +4,10 @@ A React Native mobile application. The app features a **Home Page** with categor
 
 ## 📱 Screenshots
 
+![simulator_screenshot_44984657-BD4C-40BC-AE8E-52D3BFD59105](https://github.com/user-attachments/assets/e011d08c-2199-4e94-acb8-9e57a588b5ba)
+<img width="1320" height="2868" alt="simulator_screenshot_397E8DA7-5597-4316-833B-0DCE9222CAE4" src="https://github.com/user-attachments/assets/13d971ca-1307-410c-8c3e-8cac5e738b62" />
+
+
 | Home Page | Feed Page |
 |-----------|-----------|
 | Categorized content sections | Vertical video feed with expandable descriptions |
